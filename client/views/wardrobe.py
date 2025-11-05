@@ -2,14 +2,14 @@ from rest_framework import viewsets, filters
 from rest_framework.permissions import IsAuthenticated
 from client.models import WardrobeItem
 from client.serializers.wardrobe import WardrobeItemSerializer
-from client.permissions import IsClientOwner
+from common.permissions import IsClient
 
 class WardrobeItemViewSet(viewsets.ModelViewSet):
     """
     CRUD for the authenticated user's wardrobe items.
     """
     serializer_class = WardrobeItemSerializer
-    permission_classes = [IsAuthenticated, IsClientOwner]
+    permission_classes = [IsAuthenticated, IsClient]
 
     def get_queryset(self):
         # Only the current user's items

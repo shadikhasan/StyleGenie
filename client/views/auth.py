@@ -14,6 +14,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
 from client.models import ClientProfile
 
+from common.permissions import IsClient
 from client.serializers.auth import (
     ClientChangePasswordSerializer,
     ClientPasswordResetSerializer,
@@ -30,12 +31,12 @@ User = get_user_model()
 # --- Auth ---
 
 class ClientRegisterView(generics.CreateAPIView):
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [AllowAny]
     serializer_class = ClientRegisterSerializer
 
 
 class ClientLoginView(TokenObtainPairView):
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [AllowAny]
     serializer_class = ClientLoginSerializer
 
 
@@ -44,7 +45,7 @@ class ClientLogoutView(APIView):
     Expect body: {"refresh": "<refresh_token>"}
     Uses SimpleJWT blacklist app.
     """
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsClient]
 
     def post(self, request):
         refresh = request.data.get("refresh")
@@ -62,7 +63,7 @@ class ClientLogoutView(APIView):
 # --- Me / Profile ---
 
 class ClientProfileView(APIView):
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsClient]
 
     def get(self, request):
         profile, _ = ClientProfile.objects.get_or_create(user=request.user)
@@ -80,7 +81,7 @@ class ClientProfileView(APIView):
 # P A S S W O R D   C H A N G E
 # --------------------------
 class ChangePasswordView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsClient]
 
     def post(self, request):
         s = ClientChangePasswordSerializer(data=request.data, context={"user": request.user})

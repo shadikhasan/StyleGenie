@@ -10,6 +10,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 from common.utils import revoke_user_tokens
 from stylist.models import StylistProfile  # adjust path
+from common.permissions import IsStylist
 from stylist.serializers import (
     StylistRegisterSerializer,
     StylistLoginSerializer,
@@ -34,7 +35,7 @@ class StylistLoginView(TokenObtainPairView):
 
 
 class StylistLogoutView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsStylist]
 
     def post(self, request):
         refresh = request.data.get("refresh")
@@ -50,7 +51,7 @@ class StylistLogoutView(APIView):
 
 # --- Me / Profile ---
 class StylistProfileView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsStylist]
 
     def get(self, request):
         profile, _ = StylistProfile.objects.get_or_create(user=request.user)
@@ -66,7 +67,7 @@ class StylistProfileView(APIView):
 
 # --- Password Change ---
 class StylistChangePasswordView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsStylist]
 
     def post(self, request):
         s = StylistChangePasswordSerializer(data=request.data, context={"user": request.user})
