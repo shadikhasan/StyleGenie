@@ -4,8 +4,10 @@ client/urls.py
 Client-facing routes: authentication, password management, and profile.
 """
 
-from django.urls import path
+from django.urls import path, include
 from rest_framework_simplejwt.views import TokenRefreshView
+from rest_framework.routers import DefaultRouter
+from client.views.wardrobe import WardrobeItemViewSet
 
 from client.views.auth import (
     ClientRegisterView,
@@ -18,6 +20,9 @@ from client.views.auth import (
 )
 
 app_name = "client"
+
+router = DefaultRouter()
+router.register(r"wardrobe", WardrobeItemViewSet, basename="wardrobe")
 
 urlpatterns = [
     # --- Auth ---
@@ -35,4 +40,6 @@ urlpatterns = [
     path("auth/change-password/", ChangePasswordView.as_view(), name="change-password"),
     path("auth/send-reset-password-email/", SendPasswordResetEmailView.as_view(), name="send-reset-password-email"),
     path("auth/reset-password/<uidb64>/<token>/", PasswordResetConfirmView.as_view(), name="reset-password-confirm",),
+    
+    path("", include(router.urls)),
 ]

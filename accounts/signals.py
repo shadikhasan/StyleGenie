@@ -15,7 +15,8 @@ from django.dispatch import receiver
 from django.contrib.auth import get_user_model
 
 # --- Local apps ---
-from .models import ClientProfile, StylistProfile
+from client.models import ClientProfile
+from stylist.models import StylistProfile
 
 User = get_user_model()
 

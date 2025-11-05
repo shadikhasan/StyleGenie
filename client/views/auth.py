@@ -12,6 +12,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
+from client.models import ClientProfile
 
 from client.serializers.auth import (
     ClientChangePasswordSerializer,
@@ -25,13 +26,6 @@ from client.serializers.auth import (
 from common.utils import revoke_user_tokens
 
 User = get_user_model()
-
-# Optional ClientProfile import
-try:
-    from ..models import ClientProfile
-except Exception:
-    ClientProfile = None
-
 
 # --- Auth ---
 
@@ -71,23 +65,15 @@ class ClientProfileView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request):
-        # Return client profile if exists, otherwise user basics
-        if ClientProfile:
-            profile, _ = ClientProfile.objects.get_or_create(user=request.user)
-            data = ClientProfileSerializer(profile).data
-        else:
-            data = ClientProfileSerializer(request.user).data
-        return Response(data)
+        profile, _ = ClientProfile.objects.get_or_create(user=request.user)
+        return Response(ClientProfileSerializer(profile).data)
 
     def patch(self, request):
-        if not ClientProfile:
-            return Response({"detail": "ClientProfile model not available."}, status=501)
-
         profile, _ = ClientProfile.objects.get_or_create(user=request.user)
         serializer = ClientProfileSerializer(profile, data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 # --------------------------

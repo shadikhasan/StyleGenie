@@ -89,13 +89,28 @@ class ClientLoginSerializer(serializers.Serializer):
             },
         }
 
-
-class ClientProfileSerializer(serializers.ModelSerializer):
-    
+class UserBasicSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ["id", "email", "username", "phone", "profile_picture", "role", "status"]
+        read_only_fields = fields
 
+class ClientProfileSerializer(serializers.ModelSerializer):
+    user = UserBasicSerializer(read_only=True)
+
+    class Meta:
+        model = ClientProfile
+        fields = [
+            "user",
+            "date_of_birth",
+            "gender",
+            "skin_tone",
+            "body_shape",
+            "face_shape",
+            "created_at",
+            "updated_at",
+        ]
+        read_only_fields = ["created_at", "updated_at"]
 
 class ClientChangePasswordSerializer(serializers.Serializer):
     old_password = serializers.CharField(write_only=True, style={"input_type": "password"})
