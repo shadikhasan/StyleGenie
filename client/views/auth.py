@@ -18,9 +18,10 @@ from common.permissions import IsClient
 from client.serializers.auth import (
     ClientChangePasswordSerializer,
     ClientPasswordResetSerializer,
+    ClientProfileReadSerializer,
+    ClientProfileUpdateSerializer,
     ClientRegisterSerializer,
     ClientLoginSerializer,
-    ClientProfileSerializer,
     ClientSendPasswordResetEmailSerializer,
 
 )
@@ -67,19 +68,19 @@ class ClientProfileView(APIView):
 
     def get(self, request):
         profile, _ = ClientProfile.objects.get_or_create(user=request.user)
-        return Response(ClientProfileSerializer(profile).data)
+        return Response(ClientProfileReadSerializer(profile).data)
 
     def patch(self, request):
         profile, _ = ClientProfile.objects.get_or_create(user=request.user)
-        serializer = ClientProfileSerializer(profile, data=request.data, partial=True)
+        serializer = ClientProfileUpdateSerializer(profile, data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-# --------------------------
+# ------------------------------
 # P A S S W O R D   C H A N G E
-# --------------------------
+# ------------------------------
 class ChangePasswordView(APIView):
     permission_classes = [IsAuthenticated, IsClient]
 

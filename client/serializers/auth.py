@@ -84,7 +84,7 @@ class UserBasicSerializer(serializers.ModelSerializer):
         fields = ["id", "email", "username", "phone", "profile_picture", "role", "status"]
         read_only_fields = fields
 
-class ClientProfileSerializer(serializers.ModelSerializer):
+class ClientProfileReadSerializer(serializers.ModelSerializer):
     user = UserBasicSerializer(read_only=True)
 
     class Meta:
@@ -100,6 +100,53 @@ class ClientProfileSerializer(serializers.ModelSerializer):
             "updated_at",
         ]
         read_only_fields = ["created_at", "updated_at"]
+class ClientProfileUpdateSerializer(serializers.ModelSerializer):
+    first_name = serializers.CharField(source="user.first_name", required=False, allow_blank=True)
+    last_name = serializers.CharField(source="user.last_name", required=False, allow_blank=True)
+    profile_picture = serializers.URLField(source="user.profile_picture_url", required=False, allow_blank=True)
+    class Meta:
+        model = ClientProfile
+        fields = [
+            "first_name",
+            'last_name',
+            "profile_picture",
+            "date_of_birth",
+            "gender",
+            "skin_tone",
+            "body_shape",
+            "face_shape",
+            "created_at",
+            "updated_at",
+        ]
+        read_only_fields = ["created_at", "updated_at"]
+        
+    @staticmethod
+    def _blank_to_none(v):
+        # lets you send "" to clear optional fields
+        return None if isinstance(v, str) and v.strip() == "" else v
+
+    def update(self, instance, validated_data):
+        # Pull the nested user payload produced by `source="user.*"`
+        user_data = validated_data.pop("user", {})
+
+        # ---- update ClientProfile fields ----
+        for attr, value in validated_data.items():
+            setattr(instance, attr, self._blank_to_none(value))
+        instance.save()
+
+        # ---- update related User fields (once) ----
+        if user_data:
+            user = instance.user
+            if "first_name" in user_data:
+                user.first_name = self._blank_to_none(user_data["first_name"])
+            if "last_name" in user_data:
+                user.last_name = self._blank_to_none(user_data["last_name"])
+            # NOTE: key is profile_picture_url because of source="user.profile_picture_url"
+            if "profile_picture_url" in user_data:
+                user.profile_picture_url = self._blank_to_none(user_data["profile_picture_url"])
+            user.save()
+
+        return instance
 
 class ClientChangePasswordSerializer(serializers.Serializer):
     old_password = serializers.CharField(write_only=True, style={"input_type": "password"})
