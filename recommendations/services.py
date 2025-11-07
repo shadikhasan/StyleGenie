@@ -70,7 +70,7 @@ def recommend(
     destination: str,
     occasion: str,
     dt_iso: str,
-    drawer_products_override: List[Dict[str, Any]] | None = None,
+    drawer_products_override: Optional[List[Dict[str, Any]]] = None,
 ) -> Dict[str, Any]:
     """
     Build payload from stored profile (+ optional drawer override), call AI microservice,
