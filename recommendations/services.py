@@ -8,7 +8,7 @@ from client.models import ClientProfile
 # ===== Hardcoded AI service config (per your request) =====
 AI_REC_BASE_URL = "http://158.220.126.38:8000"
 AI_REC_PATH = "/api/v1/recommendations/recommend"
-AI_REC_TIMEOUTS = (3.0, 15.0)  # (connect, read)
+AI_REC_TIMEOUTS = (3.0, 30.0)  # (connect, read)
 AI_REC_AUTH_TOKEN = "9f8b9c2d5a63e1f60c7e3e2d98b4c4hdjahbf28d2f72afbb8a6a83f0dc3a23b67"
 
 # Required profile fields for the AI
