@@ -31,7 +31,7 @@ class ClientRegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, min_length=8)
     class Meta:
         model = User
-        fields = ["email", "username", "password", "phone", "profile_picture"]
+        fields = ["email", "username", "first_name", "last_name", "password", "phone", "profile_picture"]
 
     def create(self, validated_data):
         password = validated_data.pop("password")
