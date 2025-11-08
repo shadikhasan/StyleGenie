@@ -139,8 +139,8 @@ const members = [
       "Integrates chat and payment systems",
     ],
     links: {
-      github: "https://github.com/hasnain-ali",
-      linkedin: "https://www.linkedin.com/in/hasnain-ali/",
+      github: "https://github.com/mdhasnainali/",
+      linkedin: "https://www.linkedin.com/in/mdhasnainali/",
     },
   },
   {
@@ -153,19 +153,24 @@ const members = [
     subject: "Information and Communication Engineering",
     skills: ["Figma", "Prototyping", "UI/UX"],
     responsibilities: ["Designs the product UI", "Creates interactive flows"],
-    links: { linkedin: "https://linkedin.com/in/hm-sazzad-kadir" },
+    links: { 
+      github: "https://github.com/byrthokobi",
+      linkedin: "https://linkedin.com/in/hm-sazzad-kadir" },
   },
   {
     id: "4",
     name: "MAIMOONA PRITY",
     role: "Product Designer",
     team: "Design",
-    email: "maimoona@example.com",
+    email: "maimoonaprity@gmail.com",
     university: "Islamic University",
     subject: "Information and Communication Engineering",
     skills: ["Figma", "Prototyping", "UI/UX"],
     responsibilities: ["Designs the product UI", "Creates interactive flows"],
-    links: { linkedin: "https://linkedin.com/in/maimoona-prity" },
+    links: {
+      github: "https://github.com/maimoonaprity ",
+      linkedin: "https://www.linkedin.com/in/maimoona-prity-1312b6299/",
+    },
   },
 ];
 

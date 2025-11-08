@@ -1,4 +1,5 @@
 // TeamSection.tsx
+import { Github, Linkedin, Mail, Globe, GraduationCap } from "lucide-react"; // ✅ all icons
 import React, { useMemo, useState } from "react";
 
 type Member = {
@@ -12,12 +13,12 @@ type Member = {
   avatarUrl?: string;
   skills?: string[];
   responsibilities?: string[];
-  university?: string;   // ✅ NEW
-  subject?: string;      // ✅ NEW
+  university?: string;
+  subject?: string;
   links?: {
     site?: string;
-    github?: string;     // ✅ will render GitHub button
-    linkedin?: string;   // ✅ will render LinkedIn button
+    github?: string;
+    linkedin?: string;
   };
 };
 
@@ -41,8 +42,8 @@ export default function TeamSection({
         m.name,
         m.role,
         m.team,
-        m.university,          // ✅ searchable
-        m.subject,             // ✅ searchable
+        m.university,
+        m.subject,
         ...(m.skills ?? []),
       ]
         .filter(Boolean)
@@ -59,7 +60,8 @@ export default function TeamSection({
         border: "1px solid #eee",
         maxWidth: "1600px",
         margin: "2rem auto",
-        fontFamily: "Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto",
+        fontFamily:
+          "Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto",
       }}
     >
       <h2 style={{ fontSize: "1.75rem", fontWeight: 700, marginBottom: "0.5rem" }}>
@@ -172,8 +174,8 @@ export default function TeamSection({
                     padding: "8px 10px",
                   }}
                 >
-                  <div style={{ fontSize: "0.8rem", color: "#333", fontWeight: 600 }}>
-                    🎓 Education
+                  <div style={{ fontSize: "0.8rem", color: "#333", fontWeight: 600, display: "flex", alignItems: "center", gap: "4px" }}>
+                    <GraduationCap className="w-4 h-4 text-purple-600" /> Education
                   </div>
                   <div style={{ fontSize: "0.85rem", color: "#555", marginTop: "4px" }}>
                     {m.university && <span>{m.university}</span>}
@@ -189,33 +191,50 @@ export default function TeamSection({
                   <a
                     href={`mailto:${m.email}`}
                     style={linkStyle}
+                    className="flex items-center gap-1"
                     target="_blank"
                     rel="noreferrer"
                   >
-                    ✉️ Email
+                    <Mail className="w-4 h-4 text-red-500" /> Email
                   </a>
                 )}
                 {m.links?.linkedin && (
-                  <a href={m.links.linkedin} style={linkStyle} target="_blank" rel="noreferrer">
-                    💼 LinkedIn
+                  <a
+                    href={m.links.linkedin}
+                    style={linkStyle}
+                    className="flex items-center gap-1"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <Linkedin className="w-4 h-4 text-[#0A66C2]" /> LinkedIn
                   </a>
                 )}
                 {m.links?.github && (
-                  <a href={m.links.github} style={linkStyle} target="_blank" rel="noreferrer">
-                    🐙 GitHub
+                  <a
+                    href={m.links.github}
+                    style={linkStyle}
+                    className="flex items-center gap-1"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <Github className="w-4 h-4 text-black" /> GitHub
                   </a>
                 )}
                 {m.links?.site && (
-                  <a href={m.links.site} style={linkStyle} target="_blank" rel="noreferrer">
-                    🌐 Website
+                  <a
+                    href={m.links.site}
+                    style={linkStyle}
+                    className="flex items-center gap-1"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <Globe className="w-4 h-4 text-green-600" /> Website
                   </a>
                 )}
               </div>
 
               {m.timezone && (
-                <p style={{ fontSize: "0.75rem", color: "#999" }}>
-                  🕓 {m.timezone}
-                </p>
+                <p style={{ fontSize: "0.75rem", color: "#999" }}>🕓 {m.timezone}</p>
               )}
             </div>
           ))}
