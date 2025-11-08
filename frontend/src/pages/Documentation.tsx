@@ -81,18 +81,6 @@ const documentationLinks: DocumentationLink[] = [
     example: "https://www.eraser.io/workspace/stylegenie-system-design",
   },
   {
-    key: "figma",
-    title: "Figma UI Kit & Prototype",
-    description:
-      "Visual design system, component specs, and prototype flows for stakeholder reviews.",
-    owner: "Design",
-    icon: "figma",
-    url: fromEnv(env.VITE_FIGMA_FILE_URL),
-    instructions:
-      "Set VITE_FIGMA_FILE_URL so PMs can deep-dive into interaction details.",
-    example: "https://www.figma.com/file/XXXXX/stylegenie?type=design",
-  },
-  {
     key: "pitch",
     title: "Pitch / Executive Deck",
     description:
