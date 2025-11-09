@@ -229,7 +229,7 @@ const statusStyles: Record<
 
 const Documentation = () => {
   const heroLinks = documentationLinks.filter((link) =>
-    ["system-design", "figma"].includes(link.key)
+    ["system-design", "pitch"].includes(link.key)
   );
 
   return (
