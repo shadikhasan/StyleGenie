@@ -110,7 +110,7 @@ const members = [
     ],
     links: {
       github: "https://github.com/shadikhasan",
-      linkedin: "https://www.linkedin.com/in/shadikhasan/",
+      linkedin: "https://www.linkedin.com/in/shadik0/",
     },
   },
   {
@@ -136,14 +136,14 @@ const members = [
     name: "HM SAZZAD KADIR",
     role: "Frontend Engineer",
     team: "Engineering",
-    email: "sazzad@example.com",
+    email: "msse2015@iit.du.ac.bd",
     university: "University of Rajshahi",
     subject: "Information and Communication Engineering",
     skills: ["Figma", "Prototyping", "UI/UX"],
     responsibilities: ["Designs the product UI", "Creates interactive flows"],
     links: { 
       github: "https://github.com/byrthokobi",
-      linkedin: "https://linkedin.com/in/hm-sazzad-kadir" },
+      linkedin: "https://www.linkedin.com/in/h-m-sazzad-quadir-5a7a701b0/" },
   },
   {
     id: "4",
