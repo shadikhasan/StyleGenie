@@ -121,11 +121,13 @@ CSRF_TRUSTED_ORIGINS = os.environ.get("CSRF_TRUSTED_ORIGINS", "").split(",")
 # Example: CSRF_TRUSTED_ORIGINS=https://myfrontend.com,https://sub.myfrontend.com
 
 # # CORS allowed origins
-# CORS_ALLOWED_ORIGINS = os.environ.get("CORS_ALLOWED_ORIGINS", "").split(",")
-# # Example: CORS_ALLOWED_ORIGINS=http://localhost:3000,https://myfrontend.com
+CORS_ALLOWED_ORIGINS = os.environ.get("CORS_ALLOWED_ORIGINS", "").split(",")
+# Example: CORS_ALLOWED_ORIGINS=http://localhost:3000,https://myfrontend.com
 
-CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOW_CREDENTIALS = True
+# CORS SETTINGS
+CORS_ALLOW_ALL_ORIGINS = os.environ.get("CORS_ALLOW_ALL_ORIGINS", "False").lower() == "true"
+CORS_ALLOW_CREDENTIALS = os.environ.get("CORS_ALLOW_CREDENTIALS", "False").lower() == "true"
+
 
 
 
