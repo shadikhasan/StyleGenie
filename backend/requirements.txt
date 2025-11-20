@@ -9,3 +9,10 @@ python-dotenv
 drf-spectacular
 requests
 gunicorn
+
+# for agents and LLMs
+pydantic
+openai
+langchain_openai  
+langchain-google-genai
+langchain
