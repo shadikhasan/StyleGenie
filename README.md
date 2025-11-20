@@ -1,4 +1,5 @@
 # StyleGenie
+## Live Demo: https://style-genie-frontend.vercel.app
 
 AI-assisted personal styling platform that combines a Django REST API with a modern React/Vite frontend. It digitizes a client’s wardrobe, applies AI-driven outfit guidance, and connects clients with expert stylists for bookings, chat, and paid sessions.
 
@@ -28,7 +29,7 @@ AI-assisted personal styling platform that combines a Django REST API with a mod
 ## Getting Started
 
 ### Prerequisites
-- Python 3.9+ (matches the Docker image) and pip
+- Python 3.10+ (matches the Docker image) and pip
 - Node.js 18+ (LTS recommended) and npm
 - Redis (for Celery/async jobs) & PostgreSQL if running the full stack locally
 - Docker + docker-compose (optional but handy)
